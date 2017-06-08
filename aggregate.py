@@ -7,10 +7,13 @@ import time
 
 
 class Aggregate:
+    """
+    Take all the data from the database and aggregate it into a file.
+    """
     def __init__(self, conn):
         self.conn = conn
-        self.current_path = Path(os.getcwd())
-        self.output_path = self.current_path / 'output'
+        current_path = Path(os.getcwd())
+        self.output_path = current_path / 'output'
 
     def to_csv(self):
         os.makedirs(self.output_path, exist_ok=True)
@@ -54,5 +57,6 @@ class Test:
     @classmethod
     def from_list(cls, list_of_datas):
         for data in list_of_datas:
+            # Suppress badly scraped tests
             with suppress(TypeError, KeyError):
                 yield cls(data)
