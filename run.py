@@ -2,6 +2,7 @@ from configparser import ConfigParser
 
 import psycopg2
 
+from aggregate import Aggregate
 from scraper import SpeedTestScraper
 
 settings = ConfigParser()
@@ -31,6 +32,11 @@ def create_tables():
     conn.commit()
 
 if __name__ == '__main__':
-    create_tables()
-    sts = SpeedTestScraper(conn)
-    sts.scrape()
+    # create_tables()
+    # sts = SpeedTestScraper(conn)
+    # sts.scrape()
+
+    agg = Aggregate(conn)
+    agg.to_csv()
+    pass
+

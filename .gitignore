@@ -1,3 +1,4 @@
 settings.cfg
 venv
 .idea
+output/*
