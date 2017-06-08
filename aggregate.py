@@ -23,11 +23,14 @@ class Aggregate:
                       'download_speed', 'upload_speed', 'latency', 'distance',
                       'server_name', 'server_id', 'sponsor_name', 'path']
 
-        with open(self.output_path / filename, 'w+') as csvfile:
+        path = self.output_path / filename
+        with open(path, 'w+') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for test in self._get_data():
                 writer.writerow(vars(test))
+
+        return path
 
     def _get_data(self):
         with self.conn.cursor() as cur:

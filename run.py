@@ -32,11 +32,19 @@ def create_tables():
     conn.commit()
 
 if __name__ == '__main__':
-    # create_tables()
-    # sts = SpeedTestScraper(conn)
-    # sts.scrape()
+    print('Settings up database')
+    create_tables()
 
-    agg = Aggregate(conn)
-    agg.to_csv()
-    pass
+    choice = input('Do you want to scrape data? y/N').lower() or 'N'
+    if choice == 'y':
+        print('Start scraping...')
+        sts = SpeedTestScraper(conn)
+        sts.scrape()
+
+    choice = input('Do you want to aggregate data? y/N').lower() or 'N'
+    if choice == 'y':
+        print('aggregating...')
+        agg = Aggregate(conn)
+        path = agg.to_csv()
+        print(f'Output file in {path}')
 
